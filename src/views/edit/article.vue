@@ -31,7 +31,7 @@
                 <i class="el-icon-more"></i>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>
-                    <a :href="'http://www.luhufu.com/articles/'+item.title +'.html'" target="_blank">查看</a>
+                    <a :href="'/articles/'+item.title +'.html'" target="_blank">查看</a>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <div @click="clickDel(item)">删除</div>
@@ -66,7 +66,7 @@
           <iframe
               class="w-full h-full"
               ref="editormd"
-              src="http://www.lufuhu.com/tools/editor.md/index.html"
+              src="/tools/editor.md/index.html"
               frameborder="no"
               border="0"
               marginwidth="0"
