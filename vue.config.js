@@ -9,6 +9,8 @@ module.exports = {
                 "vue-router": "VueRouter",
                 axios: "axios",
                 'element-ui': 'ELEMENT',
+                "vue-lazyload":"VueLazyload",
+                "js-cookie": "Cookies",
             };
         }
     },
@@ -23,6 +25,8 @@ module.exports = {
                 "https://unpkg.com/vuex",
                 "https://unpkg.com/axios@0.21.1/dist/axios.min.js",
                 "https://unpkg.com/element-ui/lib/index.js",
+                "https://unpkg.com/vue-lazyload/vue-lazyload.js",
+                "https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js",
             ]
         } : {};
         config.plugin("html").tap(args => {

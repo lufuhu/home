@@ -164,6 +164,13 @@
               v-model="form.summary">
           </el-input>
         </el-form-item>
+        <el-form-item label="地址">
+          <el-input
+              placeholder="请输入内容"
+              prefix-icon="el-icon-link"
+              v-model="form.url">
+          </el-input>
+        </el-form-item>
         <div class="flex">
           <el-form-item label="状态">
             <el-select v-model="form.status" placeholder="请选择">
@@ -200,6 +207,7 @@ export default {
         title: "",
         type: '0',
         pic: "",
+        url: "",
         topic: "",
         tag: [],
         sort: 0,
@@ -320,7 +328,7 @@ export default {
       this.dialogVisible = false;
       this.articleList(this.params);
       if (val) {
-        this.$router.push('/edit' + val)
+        this.$router.push('/edit/' + val)
       }
     },
     setContent() {

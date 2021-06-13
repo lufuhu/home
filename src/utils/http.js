@@ -37,30 +37,20 @@ export default function (config, data = {}) {
         },
     }
     return new Promise((resolve, reject) => {
-        // if (cache && config.method === 'GET') {
-        //     localforage.getItem(url).then(function (value) {
-        //         if (value) {
-        //             return resolve(value)
-        //         } else {
-        //             doHttp()
-        //         }
-        //     }).catch(() => {
-        //         doHttp()
-        //     })
-        // } else {
-        //     doHttp()
-        // }
-        doHttp();
-
-        async function doHttp() {
-            axios(httpConfig).then((res) => {
-                if (config.method === 'GET') {
-                    localforage.setItem(url, res.data)
+        if (config.cache) {
+            localforage.getItem(url).then(function (value) {
+                if (value) {
+                    return resolve(value)
                 }
-                return resolve(res.data)
-            }).catch((response) => {
-                reject(response)
-            })
+            });
         }
+        axios(httpConfig).then((res) => {
+            if (config.method === 'GET') {
+                localforage.setItem(url, res.data)
+            }
+            return resolve(res.data)
+        }).catch((response) => {
+            reject(response)
+        })
     })
 }

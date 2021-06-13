@@ -3,8 +3,10 @@
     <el-row :gutter="16">
       <el-col v-for="(item, index) in list" :key="index" :span="12" class="mb-4">
         <el-card>
-          <el-link :href="item.url" target="_blank" class="font-bold">{{ item.title }}</el-link>
-          <div class="my-3 text-sm text-gray-400" v-html="item.summary"></div>
+          <div class="truncate">
+            <el-link :href="item.url" target="_blank" class="font-bold">{{ item.title }}</el-link>
+          </div>
+          <div class="my-3 text-sm text-gray-400 leading-6 truncate-2 h-12" v-html="item.summary"></div>
           <div class="text-sm text-gray-400 flex items-center">
             <div v-if="item.topic" class="flex items-center">
               <i class="el-icon-connection"></i>
@@ -37,7 +39,6 @@ export default {
   },
   watch: {
     articleListData: function (val) {
-      console.log(val)
       this.list = val.data.data
     },
   },
