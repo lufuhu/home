@@ -36,15 +36,17 @@
     </div>
     <el-row :gutter="10">
       <el-col v-for="(item, index) in topic" :key="index" :span="6" class="mb-3">
-        <el-card>
-          <div slot="header" class="flex items-center justify-between">
+        <el-card :body-style="{ padding: '10px' }">
+          <div class="flex items-center justify-between border-b pb-1 mb-1">
             <div>{{ item.name }}</div>
             <router-link class="text-xs text-gray-500" :to="'/article?topic='+item.name">
               更多
             </router-link>
           </div>
-          <div v-for="(item1, index1) in item.children" :key="index1" class="mb-2">
-            <el-link type="info" class="truncate" target="_blank" :href="item1.url">{{ item1.title }}</el-link>
+          <div class="h-36 pt-1">
+            <div v-for="(item1, index1) in item.children" :key="index1" class="mb-1">
+              <el-link type="info" class="truncate-link" target="_blank" :href="item1.url">{{ item1.title }}</el-link>
+            </div>
           </div>
         </el-card>
       </el-col>
@@ -63,10 +65,6 @@
     <div class="text-center">
       <div class="text-2xl mt-6">统计</div>
       <el-divider></el-divider>
-    </div>
-    <div class="flex items-center justify-center">
-
-
     </div>
     <div class="max-w-screen-md mx-auto mb-10">
       <el-row :gutter="30">

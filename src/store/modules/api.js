@@ -11,9 +11,7 @@ Object.keys(api).forEach(function (key) {
         return state[key]
     }
     mutations[key] = function (state, params) {
-        request(api[key], params).then(res => {
-            state[key] = res
-        })
+        request(key, api[key], params)
     }
     actions[key] = function ({commit}, params) {
         commit(key, params)

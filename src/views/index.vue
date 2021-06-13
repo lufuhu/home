@@ -71,9 +71,12 @@
     <div class="bg-black footer">
       <div class="w-main mx-auto max-w-screen-xl flex justify-center items-center">
         <div class="text-gray-300 text-sm flex justify-center items-center py-10">
-          <el-link href="https://element.eleme.io" target="_blank">粤ICP备18099781号-6</el-link>
+          <el-link href="https://beian.miit.gov.cn" target="_blank">鄂ICP备2021009343号-1</el-link>
           <el-divider direction="vertical"></el-divider>
-          <el-link href="https://element.eleme.io" target="_blank">粤公网安备44013330号</el-link>
+          <div class="flex items-center">
+            <img src="../assets/gongan.png" class="mr-1"/>
+            <el-link href="http://www.beian.gov.cn" target="_blank">鄂公网安备号</el-link>
+          </div>
         </div>
       </div>
     </div>

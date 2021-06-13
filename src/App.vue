@@ -46,4 +46,13 @@ export default {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+.truncate-link{
+  width: 100%;
+}
+.truncate-link span{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
 </style>
