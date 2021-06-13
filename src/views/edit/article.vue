@@ -351,8 +351,9 @@ export default {
         }
       });
     },
-    handleAvatarSuccess(res, file) {
-      this.form.pic = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(res) {
+      console.log(res)
+      this.form.pic = res.data;
     },
   },
   computed: {
