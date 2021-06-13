@@ -9,8 +9,6 @@ module.exports = {
                 "vue-router": "VueRouter",
                 axios: "axios",
                 'element-ui': 'ELEMENT',
-                "overlayscrollbars": 'Overlayscrollbars',
-                "overlayscrollbars-vue": 'OverlayScrollbarsVue',
             };
         }
     },
@@ -25,13 +23,11 @@ module.exports = {
                 "https://unpkg.com/vuex",
                 "https://unpkg.com/axios@0.21.1/dist/axios.min.js",
                 "https://unpkg.com/element-ui/lib/index.js",
-                "https://unpkg.com/overlayscrollbars@1.13.1/js/OverlayScrollbars.js",
-                "https://unpkg.com/overlayscrollbars-vue@0.2.2/dist/overlayscrollbars-vue.js",
             ]
         } : {};
         config.plugin("html").tap(args => {
             args[0].cdn = cdn;
-            args[0].title = "LUFUHU";
+            args[0].title = "编程问号";
             return args;
         });
         // 修复HMR
