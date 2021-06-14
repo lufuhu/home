@@ -24,6 +24,16 @@
         </el-card>
       </el-col>
     </el-row>
+    <div class="text-center my-4">
+      <el-pagination
+          background
+          layout="prev, pager, next"
+          :current-page="params.page"
+          :total="total"
+          :page-size="per_page"
+          @current-change="paginationChange">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -34,19 +44,33 @@ export default {
   name: "articleList",
   data() {
     return {
-      list: []
+      list: [],
+      per_page: 0,
+      total: 0,
+      params: {
+        keyword: '',
+        page:1,
+      },
     }
   },
   watch: {
     articleListData: function (val) {
       this.list = val.data.data
+      this.per_page = val.data.per_page
+      this.total = val.data.total
     },
   },
   mounted() {
-    this.articleList();
+    this.articleList(this.params);
   },
   methods: {
     ...mapActions(["articleList"]),
+    paginationChange(page){
+      this.params.page = page;
+      this.params.cache = false;
+      this.articleList(this.params)
+    }
+
   },
   computed: {
     ...mapGetters(["articleListData"])

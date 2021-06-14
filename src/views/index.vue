@@ -12,6 +12,7 @@
             <el-menu-item index="/article">博客文章</el-menu-item>
           </el-menu>
           <el-popover
+              v-if="userInfo"
               class="ml-5"
               placement="bottom-end"
               width="200"
@@ -20,13 +21,13 @@
               <el-avatar
                   :size="30"
                   icon="el-icon-user"
-                  src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png">
+                  :src="userInfo.avatar">
               </el-avatar>
               <i class="el-icon-caret-bottom text-gray-400 ml-1"></i>
             </div>
             <div>
               <div class="pt-2 pb-4 text-center">
-                <div class="font-bold">LUFUHU</div>
+                <div class="font-bold">{{ userInfo.nickname }}</div>
               </div>
               <div class="border-t pt-4">
                 <el-row>
@@ -42,7 +43,7 @@
                       <div class="text-xs mt-1">设置</div>
                     </div>
                   </el-col>
-                  <el-col class="mb-3" :span="8">
+                  <el-col v-if="userInfo.nickname === 'lufuhu'" class="mb-3" :span="8">
                     <router-link to="/edit">
                       <div class="text-center">
                         <i class="el-icon-edit text-xl"></i>
@@ -60,6 +61,11 @@
               </div>
             </div>
           </el-popover>
+          <div v-else class="ml-5">
+            <a href="/auth" class="flex items-center">
+              <el-avatar :size="30" icon="el-icon-user"></el-avatar>
+            </a>
+          </div>
         </div>
       </div>
     </el-header>
@@ -85,19 +91,28 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
+
 export default {
   name: "index",
+  data() {
+    return {
+      userInfo: [],
+    }
+  },
   mounted() {
+    this.userInfo = Cookies.get('userInfo');
   }
 }
 </script>
 
 <style scoped>
-.main{
+.main {
   min-height: calc(100vh - 200px);
   padding-top: 80px;
 }
-.footer{
+
+.footer {
   height: 200px;
 }
 </style>

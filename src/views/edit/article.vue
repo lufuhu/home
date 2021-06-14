@@ -2,7 +2,7 @@
   <div>
     <div class="w-screen h-screen flex">
       <div class="flex-none w-64 flex flex-col h-full">
-        <div class="border-b h-10 px-3 flex items-center justify-center">
+        <div class="border-b flex-none h-10 px-3 flex items-center justify-center">
           <router-link to="/" class="flex-1 flex items-center">
             <img class="w-6 h-6" src="../../assets/logo.png">
             <div class="font-bold text-sm">编程问号</div>
@@ -11,12 +11,12 @@
             <el-button size="mini" type="text" round><i class="el-icon-plus"></i>新增</el-button>
           </router-link>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 overflow-y-auto overflow-x-hidden h-0">
           <el-input
               class="input-b-border"
               placeholder="请输入关键字"
               v-model="params.keyword">
-            <i @click="articleList(params)" slot="suffix" class="el-input__icon el-icon-search cursor-pointer"></i>
+            <i @click="onSearch()" slot="suffix" class="el-input__icon el-icon-search cursor-pointer"></i>
           </el-input>
           <div
               v-for="(item, index) in list"
@@ -40,16 +40,18 @@
               </el-dropdown>
             </div>
           </div>
-          <div class="my-2">
-            <el-pagination
-                :background="true"
-                :hide-on-single-page="true"
-                layout="prev, pager, next"
-                :current-page="current_page"
-                :total="total"
-                :page-size="per_page">
-            </el-pagination>
-          </div>
+        </div>
+        <div class="h-12 flex-none">
+          <el-pagination
+              class="mt-2"
+              :background="true"
+              :hide-on-single-page="true"
+              layout="prev, pager, next"
+              :current-page="params.page"
+              :total="total"
+              :page-size="per_page"
+              @current-change="paginationChange">
+          </el-pagination>
         </div>
       </div>
       <div
@@ -96,8 +98,8 @@
                 <el-option
                     v-for="(item, index) in enumTopic"
                     :key="index"
-                    :label="item.value"
-                    :value="item.key">
+                    :label="item"
+                    :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -113,8 +115,8 @@
                 <el-option
                     v-for="(item, index) in enumTag"
                     :key="index"
-                    :label="item.value"
-                    :value="item.key">
+                    :label="item"
+                    :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -205,7 +207,7 @@ export default {
       form: {
         id: '',
         title: "",
-        type: '0',
+        type: '1',
         pic: "",
         url: "",
         topic: "",
@@ -238,7 +240,7 @@ export default {
       this.enumStatus = val.data.enumStatus
       this.enumType = val.data.enumType
     },
-    articleGetSelect: function (val) {
+    articleGetSelectData: function (val) {
       this.enumTag = val.data.tag
       this.enumTopic = val.data.topic
     },
@@ -257,7 +259,6 @@ export default {
     },
     articleListData: function (val) {
       this.list = val.data.data
-      this.current_page = val.data.current_page
       this.per_page = val.data.per_page
       this.total = val.data.total
     },
@@ -296,6 +297,16 @@ export default {
     ...mapActions([
       'articleGetSelect', 'articleGetEnum', 'articleView', 'articleList', 'articleAdd', 'articleEdit', 'articleDel'
     ]),
+    onSearch(){
+      this.params.page = 1;
+      this.params.cache = false;
+      this.articleList(this.params)
+    },
+    paginationChange(page){
+      this.params.page = page;
+      this.params.cache = false;
+      this.articleList(this.params)
+    },
     showDialog(){
       this.dialogVisible = true;
     },
