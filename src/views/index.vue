@@ -48,7 +48,8 @@
     <div class="bg-black footer">
       <div class="w-main mx-auto max-w-screen-xl flex flex-col justify-center items-center">
         <div class="flex mt-16 mb-12">
-          <a class="footer-icon-1" href="https://github.com/lufuhu" target="_blank"><img src="../assets/icon/github.png"/></a>
+          <a class="footer-icon-1" href="https://github.com/lufuhu" target="_blank"><img
+              src="../assets/icon/github.png"/></a>
           <a class="footer-icon-1" href="https://gitee.com/lufuhu" target="_blank"><img src="../assets/icon/gitee.png"/></a>
           <el-popover
               placement="top"
@@ -89,7 +90,6 @@
 <script>
 import Cookies from "js-cookie";
 import {mapActions} from "vuex";
-import Utils from "../utils";
 
 export default {
   name: "index",
@@ -100,7 +100,7 @@ export default {
   },
   mounted() {
     if (Cookies.get('userInfo')) {
-      this.userInfo = JSON.parse(Utils.decodeEntities(Cookies.get('userInfo')));
+      this.userInfo = JSON.parse(Cookies.get('userInfo'));
     }
   },
   methods: {
@@ -141,18 +141,21 @@ export default {
   border-bottom: 2px solid #409EFF;
   color: #409EFF;
 }
-.header{
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+.header {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
   border: 1px solid #ebeef5;
 }
-.footer-icon-1{
+
+.footer-icon-1 {
   border: 1px solid #ffffff;
   border-radius: 50%;
   padding: 6px;
   margin: 0 10px;
   cursor: pointer;
 }
-.footer-icon-1 img{
+
+.footer-icon-1 img {
   width: 20px;
   height: 20px;
 }
