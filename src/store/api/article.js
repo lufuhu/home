@@ -4,6 +4,11 @@ export default {
         method: 'GET',
         cache:true,
     },
+    loginOut: {
+        url: '/loginout',
+        method: 'POST',
+        cache:true,
+    },
     articleGetSelect: {
         url: '/home/article/get_select_data',
         method: 'GET',

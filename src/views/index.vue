@@ -12,7 +12,7 @@
             <el-menu-item index="/article">博客文章</el-menu-item>
           </el-menu>
           <el-popover
-              v-if="userInfo"
+              v-if="userInfo && userInfo.id"
               class="ml-5"
               placement="bottom-end"
               width="200"
@@ -52,7 +52,7 @@
                     </router-link>
                   </el-col>
                   <el-col class="mb-3" :span="8">
-                    <div class="text-center">
+                    <div @click="loginOut()" class="text-center">
                       <i class="el-icon-switch-button text-xl"></i>
                       <div class="text-xs mt-1">退出</div>
                     </div>
@@ -92,16 +92,29 @@
 
 <script>
 import Cookies from "js-cookie";
-
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "index",
   data() {
     return {
-      userInfo: [],
+      userInfo: {},
     }
   },
   mounted() {
     this.userInfo = Cookies.get('userInfo');
+    console.log(this.userInfo)
+  },
+  watch: {
+    loginOutData: function () {
+      Cookies.remove('userInfo');
+      Cookies.remove('token');
+    },
+  },
+  methods: {
+    ...mapActions(["loginOut"]),
+  },
+  computed: {
+    ...mapGetters(["loginOutData"])
   }
 }
 </script>
