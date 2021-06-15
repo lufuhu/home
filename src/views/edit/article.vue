@@ -133,19 +133,7 @@
               </el-upload>
             </el-form-item>
           </el-tab-pane>
-          <el-tab-pane label="速查表" name="3">
-            <el-form-item label="图片">
-              <el-upload
-                  class="avatar-uploader"
-                  action="/api/upload"
-                  :show-file-list="false"
-                  :on-success="handleAvatarSuccess">
-                <img v-if="form.pic" :src="form.pic" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-          </el-tab-pane>
-          <el-tab-pane label="轮播图" name="4">
+          <el-tab-pane label="轮播图" name="3">
             <el-form-item label="图片">
               <el-upload
                   class="avatar-uploader"

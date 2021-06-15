@@ -64,6 +64,7 @@
 <script>
 import Cookies from "js-cookie";
 import {mapActions} from "vuex";
+import Utils from "../utils";
 
 export default {
   name: "index",
@@ -74,9 +75,8 @@ export default {
   },
   mounted() {
     if (Cookies.get('userInfo')) {
-      this.userInfo = Cookies.get('userInfo');
+      this.userInfo = JSON.parse(Utils.decodeEntities(Cookies.get('userInfo')));
     }
-    console.log(this.userInfo)
   },
   methods: {
     ...mapActions(["loginOut"]),
