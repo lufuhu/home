@@ -99,8 +99,10 @@ export default {
     }
   },
   mounted() {
+    console.log(Cookies.get('userInfo'))
     if (Cookies.get('userInfo')) {
       this.userInfo = JSON.parse(Cookies.get('userInfo'));
+      console.log(this.userInfo)
     }
   },
   methods: {
