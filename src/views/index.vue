@@ -11,13 +11,9 @@
             <el-menu-item index="/">首页</el-menu-item>
             <el-menu-item index="/article">博客文章</el-menu-item>
           </el-menu>
-          <el-popover
-              v-if="userInfo && userInfo.id"
-              class="ml-5"
-              placement="bottom-end"
-              width="200"
-              trigger="click">
-            <div slot="reference" class="flex items-center">
+
+          <el-dropdown trigger="click" v-if="userInfo && userInfo.id">
+            <div class="flex items-center ml-5">
               <el-avatar
                   :size="30"
                   icon="el-icon-user"
@@ -25,42 +21,17 @@
               </el-avatar>
               <i class="el-icon-caret-bottom text-gray-400 ml-1"></i>
             </div>
-            <div>
-              <div class="pt-2 pb-4 text-center">
-                <div class="font-bold">{{ userInfo.nickname }}</div>
-              </div>
-              <div class="border-t pt-4">
-                <el-row>
-                  <el-col class="mb-3" :span="8">
-                    <div class="text-center">
-                      <i class="el-icon-user text-xl"></i>
-                      <div class="text-xs mt-1">我的</div>
-                    </div>
-                  </el-col>
-                  <el-col class="mb-3" :span="8">
-                    <div class="text-center">
-                      <i class="el-icon-setting text-xl"></i>
-                      <div class="text-xs mt-1">设置</div>
-                    </div>
-                  </el-col>
-                  <el-col v-if="userInfo.nickname === 'lufuhu'" class="mb-3" :span="8">
-                    <router-link to="/edit">
-                      <div class="text-center">
-                        <i class="el-icon-edit text-xl"></i>
-                        <div class="text-xs mt-1">编辑</div>
-                      </div>
-                    </router-link>
-                  </el-col>
-                  <el-col class="mb-3" :span="8">
-                    <div @click="loginOut()" class="text-center">
-                      <i class="el-icon-switch-button text-xl"></i>
-                      <div class="text-xs mt-1">退出</div>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-          </el-popover>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item v-if="userInfo.edit === 1" icon="el-icon-edit">
+                <router-link to="/edit">
+                  编辑
+                </router-link>
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-switch-button">
+                <span class="p-1" @click="onLoginOut()">退出</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
           <div v-else class="ml-5">
             <a href="/auth" class="flex items-center">
               <el-avatar :size="30" icon="el-icon-user"></el-avatar>
@@ -92,7 +63,8 @@
 
 <script>
 import Cookies from "js-cookie";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions} from "vuex";
+
 export default {
   name: "index",
   data() {
@@ -101,21 +73,19 @@ export default {
     }
   },
   mounted() {
-    this.userInfo = Cookies.get('userInfo');
+    if (Cookies.get('userInfo')) {
+      this.userInfo = Cookies.get('userInfo');
+    }
     console.log(this.userInfo)
-  },
-  watch: {
-    loginOutData: function () {
-      Cookies.remove('userInfo');
-      Cookies.remove('token');
-    },
   },
   methods: {
     ...mapActions(["loginOut"]),
+    onLoginOut() {
+      Cookies.remove('userInfo');
+      Cookies.remove('token');
+      this.loginOut();
+    }
   },
-  computed: {
-    ...mapGetters(["loginOutData"])
-  }
 }
 </script>
 

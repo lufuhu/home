@@ -31,7 +31,7 @@ module.exports = {
         } : {};
         config.plugin("html").tap(args => {
             args[0].cdn = cdn;
-            args[0].title = "编程问号";
+            args[0].title = "LUFUHU | 编程问号";
             return args;
         });
         // 修复HMR
