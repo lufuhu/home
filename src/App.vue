@@ -12,6 +12,9 @@ export default {
 </script>
 
 <style>
+body{
+  background-color: #fdffff;
+}
 .w-main {
   width: 1024px;
 }
