@@ -47,7 +47,7 @@
     </el-main>
     <div class="bg-black footer">
       <div class="w-main mx-auto max-w-screen-xl flex flex-col justify-center items-center">
-        <div class="flex mt-16 mb-12">
+        <div class="flex mt-16 mb-9">
           <a class="footer-icon-1" href="https://github.com/lufuhu" target="_blank"><img
               src="../assets/icon/github.png"/></a>
           <a class="footer-icon-1" href="https://gitee.com/lufuhu" target="_blank"><img src="../assets/icon/gitee.png"/></a>
@@ -73,12 +73,22 @@
             <div class="footer-icon-1"><img src="../assets/icon/mail.png"/></div>
           </el-tooltip>
         </div>
-        <div class="text-gray-300 text-sm flex justify-center items-center">
-          <el-link href="https://beian.miit.gov.cn" target="_blank">鄂ICP备2021009343号-1</el-link>
+        <div class="text-gray-300 text-sm flex justify-center items-center w-full">
+          <div class="flex flex-1 justify-end" style="margin:0 auto; padding:20px 0;">
+            <a target="_blank" href="https://beian.miit.gov.cn" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+              <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                鄂ICP备2021009343号-1
+              </p>
+            </a>
+          </div>
           <el-divider direction="vertical"></el-divider>
-          <div class="flex items-center">
-            <img src="../assets/gongan.png" class="mr-1"/>
-            <el-link href="http://www.beian.gov.cn" target="_blank">鄂公网安备号</el-link>
+          <div class="flex flex-1" style="margin:0 auto; padding:20px 0;">
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42011202001971" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+              <img src="https://www.lufuhu.com/static/icon/gongan.png" style="float:left;"/>
+              <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                鄂公网安备 42011202001971号
+              </p>
+            </a>
           </div>
         </div>
       </div>
