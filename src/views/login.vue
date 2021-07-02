@@ -57,8 +57,10 @@ export default {
         clearInterval(this.qrT);
         this.loading = true;
       } else if (val.code === 200) {
+        clearInterval(this.qrT);
         Cookies.set('userInfo', val.data.userInfo);
         Cookies.set('token', val.data.token);
+        this.$router.push('/');
       }
     },
   },
