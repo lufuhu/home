@@ -8,7 +8,9 @@ const Cheatsheet = () => import('../views/cheatsheet.vue')
 const Tool = () => import('../views/tool.vue')
 const Login = () => import('../views/login.vue')
 
+const Edit = () => import('../views/edit/index')
 const EditArticle = () => import('../views/edit/article')
+const EditCheatsheet = () => import('../views/edit/cheatsheet')
 
 Vue.use(VueRouter)
 
@@ -27,11 +29,11 @@ const routes = [
                 path: '/article',
                 name: 'Article',
                 component: Article,
-            },{
+            }, {
                 path: '/cheatsheet',
                 name: 'Cheatsheet',
                 component: Cheatsheet,
-            },{
+            }, {
                 path: '/tool',
                 name: 'Tool',
                 component: Tool,
@@ -40,13 +42,22 @@ const routes = [
                 path: '/login',
                 name: 'Login',
                 component: Login,
-            }
+            },{
+                path: '/edit',
+                name: 'Edit',
+                component: Edit,
+            },
         ],
     },
     {
-        path: '/edit/:id?',
+        path: '/edit/article/:id?',
         name: 'EditArticle',
         component: EditArticle,
+    },
+    {
+        path: '/edit/cheatsheet/:pid?/:id?',
+        name: 'EditCheatsheet',
+        component: EditCheatsheet,
     },
 ]
 

@@ -21,6 +21,10 @@ export default function (storeKey, config, data = {}) {
     } else if(config.cache !== undefined){
         cache = config.cache
     }
+    let error = true;
+    if (config.error !== undefined) {
+        error = config.error
+    }
     config.method = config.method ? config.method : "GET"
     if (data) {
         for (let key in data) {
@@ -40,7 +44,7 @@ export default function (storeKey, config, data = {}) {
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
-            'Authorization': Cookies.get('token')
+            'Authorization': "Bearer " + Cookies.get('token')
         },
     }
     return new Promise((resolve, reject) => {
@@ -53,7 +57,7 @@ export default function (storeKey, config, data = {}) {
             });
         }
         axios(httpConfig).then((res) => {
-            if (res.data.status !== 1){
+            if (res.data.status !== 1 && error){
                 Message({
                     type: 'error',
                     message: res.data.message,

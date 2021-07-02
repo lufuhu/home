@@ -58,4 +58,7 @@ body{
   white-space: nowrap;
   width: 100%;
 }
+.qrcode .el-loading-mask p,.qrcode .el-loading-mask i{
+  color: #ccc!important;
+}
 </style>

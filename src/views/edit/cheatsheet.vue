@@ -3,7 +3,7 @@
     <div class="w-screen h-screen flex">
       <div class="flex-none w-64 flex flex-col h-full border-r">
         <div class="border-b flex-none h-10 px-3 flex items-center justify-center">
-          <router-link href="/" class="flex-1 flex items-center">
+          <router-link to="/" class="flex-1 flex items-center">
             <img class="w-6 h-6" src="../../assets/logo.png">
             <div class="font-bold text-sm">速查表</div>
           </router-link>
@@ -15,7 +15,7 @@
               :key="index"
               :class="pid === item.id ? 'item-active':''"
               class="flex items-center justify-between px-3 border-b cursor-pointer">
-            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/'+item.id">
+            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/cheatsheet/'+item.id">
               <p class="font-bold leading-6">{{ item.name }}</p>
               <p class="text-xs text-gray-400 ">({{item.name_en}})</p>
             </router-link>
@@ -43,7 +43,7 @@
       </div>
       <div class="flex-none w-64 flex flex-col h-full border-r">
         <div class="border-b flex-none h-10 px-3 flex items-center justify-end">
-          <router-link :to="'/edit/'+pid">
+          <router-link :to="'/edit/cheatsheet/'+pid">
             <el-button size="mini" type="text" round><i class="el-icon-plus"></i>新增</el-button>
           </router-link>
         </div>
@@ -53,7 +53,7 @@
               :key="index"
               :class="id === item.id ? 'item-active':''"
               class="flex items-center justify-between px-3 border-b cursor-pointer">
-            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/'+pid+'/'+item.id">
+            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/cheatsheet/'+pid+'/'+item.id">
               {{ item.title }}
             </router-link>
             <div class="px-2">
@@ -190,7 +190,7 @@ export default {
       });
       this.cheatsheetList();
       if (this.pid === parseInt(val.data)) {
-        this.$router.push('/edit');
+        this.$router.push('/edit/cheatsheet');
       }
     },
     cheatsheetMdDelData(val) {
@@ -200,7 +200,7 @@ export default {
       });
       this.cheatsheetMdList({pid:this.pid});
       if (this.id === parseInt(val.data)) {
-        this.$router.push('/edit/'+this.pid);
+        this.$router.push('/edit/cheatsheet/'+this.pid);
       }
     },
     cheatsheetMdEditData(val) {
@@ -349,7 +349,7 @@ export default {
       });
       this.cheatsheetMdList({pid: this.pid});
       if (id) {
-        this.$router.push('/edit/' + this.pid + '/' + id)
+        this.$router.push('/edit/cheatsheet/' + this.pid + '/' + id)
       }
     },
     handleAvatarSuccess(res) {

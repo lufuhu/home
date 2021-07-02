@@ -7,7 +7,7 @@
             <img class="w-6 h-6" src="../../assets/logo.png">
             <div class="font-bold text-sm">编程问号</div>
           </router-link>
-          <router-link to="/edit">
+          <router-link to="/edit/article">
             <el-button size="mini" type="text" round><i class="el-icon-plus"></i>新增</el-button>
           </router-link>
         </div>
@@ -23,7 +23,7 @@
               :key="index"
               :class="form.id === item.id ? 'item-active':''"
               class="flex items-center justify-between px-3 border-b cursor-pointer">
-            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/'+item.id">
+            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/article/'+item.id">
               {{ item.title }}
             </router-link>
             <div class="px-2">
@@ -327,7 +327,7 @@ export default {
       this.dialogVisible = false;
       this.articleList(this.params);
       if (val) {
-        this.$router.push('/edit/' + val)
+        this.$router.push('/edit/article/' + val)
       }
     },
     setContent() {
@@ -346,7 +346,7 @@ export default {
       }).then(() => {
         this.articleDel({id: item.id});
         if (parseInt(this.$route.params.id) === item.id) {
-          this.$router.push('/edit');
+          this.$router.push('/edit/article');
         }
       });
     },

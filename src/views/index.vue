@@ -29,7 +29,7 @@
               <i class="el-icon-caret-bottom text-gray-400 ml-1"></i>
             </div>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-if="userInfo.edit === 1" icon="el-icon-edit">
+              <el-dropdown-item v-if="userInfo.edit === true" icon="el-icon-edit">
                 <router-link to="/edit">
                   编辑
                 </router-link>
@@ -40,9 +40,9 @@
             </el-dropdown-menu>
           </el-dropdown>
           <div v-else class="ml-5">
-            <a href="/auth" class="flex items-center">
+            <router-link to="/login" class="flex items-center">
               <el-avatar :size="30" icon="el-icon-user"></el-avatar>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
