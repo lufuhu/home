@@ -117,8 +117,7 @@ export default {
   },
   mounted() {
     if (Cookies.get('userInfo')) {
-      console.log(Cookies.get('userInfo'))
-      this.userInfo = JSON.parse(Cookies.get('userInfo'));
+      this.userInfo = JSON.parse(this.$utils.decodeEntities(Cookies.get('userInfo')));
     }
   },
   methods: {
