@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fixed w-full z-50 bg-white header">
+    <div class="w-full bg-white header">
       <div class="w-main mx-auto max-w-screen-xl flex items-center justify-between">
         <router-link to="/" class="flex items-center">
           <img class="w-14 h-14" src="../assets/logo.png">
@@ -9,7 +9,14 @@
         <div class="flex items-center justify-center">
           <div class="flex items-center justify-center">
             <router-link class="hn-item" :class="$route.path === '/' ? 'hn-item-active':''" to="/">首页</router-link>
-            <router-link class="hn-item" :class="$route.path === '/article' ? 'hn-item-active':''" to="/article">博客文章
+            <router-link class="hn-item" :class="$route.path === '/article' ? 'hn-item-active':''" to="/article">
+              博客文章
+            </router-link>
+            <router-link class="hn-item" :class="$route.path === '/cheatsheet' ? 'hn-item-active':''" to="/cheatsheet">
+              速查表
+            </router-link>
+            <router-link class="hn-item" :class="$route.path === '/tool' ? 'hn-item-active':''" to="/tool">
+              在线工具
             </router-link>
           </div>
           <el-dropdown trigger="click" v-if="userInfo && userInfo.id">
@@ -110,6 +117,7 @@ export default {
   },
   mounted() {
     if (Cookies.get('userInfo')) {
+      console.log(Cookies.get('userInfo'))
       this.userInfo = JSON.parse(Cookies.get('userInfo'));
     }
   },
@@ -128,7 +136,7 @@ export default {
 <style scoped>
 .main {
   min-height: calc(100vh - 200px);
-  padding-top: 80px;
+  padding-top: 30px;
 }
 
 .footer {

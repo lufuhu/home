@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 const Index = () => import('../views/index.vue')
 const Home = () => import('../views/home.vue')
 const Article = () => import('../views/article.vue')
+const Cheatsheet = () => import('../views/cheatsheet.vue')
+const Tool = () => import('../views/tool.vue')
 const Login = () => import('../views/login.vue')
 
 const EditArticle = () => import('../views/edit/article')
@@ -25,6 +27,14 @@ const routes = [
                 path: '/article',
                 name: 'Article',
                 component: Article,
+            },{
+                path: '/cheatsheet',
+                name: 'Cheatsheet',
+                component: Cheatsheet,
+            },{
+                path: '/tool',
+                name: 'Tool',
+                component: Tool,
             },
             {
                 path: '/login',
