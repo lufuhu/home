@@ -58,9 +58,9 @@ export default {
         this.loading = true;
       } else if (val.code === 200) {
         clearInterval(this.qrT);
-        Cookies.set('userInfo', val.data.userInfo);
+        Cookies.set('userInfo', JSON.stringify(val.data.userInfo));
         Cookies.set('token', val.data.token);
-        this.$router.push('/');
+        window.location.href = "/";
       }
     },
   },

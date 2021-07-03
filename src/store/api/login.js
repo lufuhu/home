@@ -11,6 +11,6 @@ export default {
     loginOut: {
         url: '/auth/loginout',
         method: 'POST',
-        cache:true,
+        error: false,
     },
 }
