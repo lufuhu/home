@@ -68,6 +68,7 @@ export default {
     paginationChange(page){
       this.params.page = page;
       this.params.cache = false;
+      document.body.scrollTop=document.documentElement.scrollTop=0
       this.articleList(this.params)
     }
 

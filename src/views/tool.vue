@@ -3,10 +3,12 @@
     <el-row :gutter="16">
       <el-col v-for="(item, index) in list" :key="index" :span="6" class="mb-4">
         <el-card>
-          <a :href="item.url" target="_blank" class="flex items-center">
-            <img class="w-8 h-8 flex-none mr-2" :src="item.icon">
-            <div class="truncate flex-1">{{item.name}}</div>
-          </a>
+          <div slot="header">
+            {{ item.title }}
+          </div>
+          <el-link class="mb-2" :href="item1.url" v-for="(item1,index1) in item.children" :key="index1" target="_blank">
+            <div class="truncate">{{ item1.title }}</div>
+          </el-link>
         </el-card>
       </el-col>
     </el-row>

@@ -2,7 +2,7 @@
   <div>
     <div class="w-screen h-screen flex">
       <div class="flex-none w-64 flex flex-col h-full border-r">
-        <div class="border-b flex-none h-10 px-3 flex items-center justify-center">
+        <div class="border-b flex-none h-12 px-3 flex items-center justify-center">
           <router-link to="/" class="flex-1 flex items-center">
             <img class="w-6 h-6" src="../../assets/logo.png">
             <div class="font-bold text-sm">速查表</div>
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="flex-none w-64 flex flex-col h-full border-r">
-        <div class="border-b flex-none h-10 px-3 flex items-center justify-end">
+        <div class="border-b flex-none h-12 px-3 flex items-center justify-end">
           <router-link :to="'/edit/cheatsheet/'+pid">
             <el-button size="mini" type="text" round><i class="el-icon-plus"></i>新增</el-button>
           </router-link>
@@ -75,7 +75,7 @@
           element-loading-spinner="el-icon-loading"
           element-loading-background="rgba(225, 225, 225, 0.8)"
           class="flex-1 flex flex-col w-full h-full">
-        <div class="flex-none flex items-center">
+        <div class="flex-none flex items-end h-12">
           <el-input v-model="formMd.title" class="input-b-border" placeholder="标题"></el-input>
           <el-button class="mx-1" size="small" type="primary" @click="onMdSubmit()">保存</el-button>
         </div>

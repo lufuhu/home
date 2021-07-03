@@ -11,6 +11,7 @@ const Login = () => import('../views/login.vue')
 const Edit = () => import('../views/edit/index')
 const EditArticle = () => import('../views/edit/article')
 const EditCheatsheet = () => import('../views/edit/cheatsheet')
+const EditInterview = () => import('../views/edit/interview')
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,10 @@ const routes = [
         path: '/edit/cheatsheet/:pid?/:id?',
         name: 'EditCheatsheet',
         component: EditCheatsheet,
+    },{
+        path: '/edit/interview/:id?',
+        name: 'EditInterview',
+        component: EditInterview,
     },
 ]
 

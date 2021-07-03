@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="w-screen h-screen flex">
-      <div class="flex-none w-64 flex flex-col h-full">
+      <div class="flex-none w-96 flex flex-col h-full">
         <div class="border-b flex-none h-12 px-3 flex items-center justify-center">
           <router-link to="/" class="flex-1 flex items-center">
             <img class="w-6 h-6" src="../../assets/logo.png">
             <div class="font-bold text-sm">编程问号</div>
           </router-link>
-          <router-link to="/edit/article">
+          <router-link to="/edit/interview">
             <el-button size="mini" type="text" round><i class="el-icon-plus"></i>新增</el-button>
           </router-link>
         </div>
@@ -22,17 +22,14 @@
               v-for="(item, index) in list"
               :key="index"
               :class="form.id === item.id ? 'item-active':''"
-              class="flex items-center justify-between px-3 border-b cursor-pointer">
-            <router-link class="flex-1 truncate py-3 text-sm" :to="'/edit/article/'+item.id">
+              class="flex items-center justify-between px-3 border-b cursor-pointer h-16">
+            <router-link class="flex-1 truncate-2 text-sm" :to="'/edit/interview/'+item.id">
               {{ item.title }}
             </router-link>
             <div class="px-2">
               <el-dropdown trigger="click">
                 <i class="el-icon-more"></i>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>
-                    <a :href="'/articles/'+item.title +'.html'" target="_blank">查看</a>
-                  </el-dropdown-item>
                   <el-dropdown-item>
                     <div @click="clickDel(item)">删除</div>
                   </el-dropdown-item>
@@ -62,7 +59,22 @@
           class="flex-1 flex flex-col w-full h-full">
         <div class="flex-none flex items-end h-12">
           <el-input v-model="form.title" class="input-b-border" placeholder="标题"></el-input>
-          <el-button class="mx-1" size="small" type="primary" @click="showDialog()">保存</el-button>
+          <el-select
+              class="w-180 input-b-border ml-1"
+              v-model="form.tag"
+              multiple
+              filterable
+              allow-create
+              default-first-option
+              placeholder="请选择标签">
+            <el-option
+                v-for="(item, index) in enumTag"
+                :key="index"
+                :label="item"
+                :value="item">
+            </el-option>
+          </el-select>
+          <el-button size="small" class="mx-1" type="primary" @click="onSubmit()">保存</el-button>
         </div>
         <div class="flex-1">
           <iframe
@@ -79,109 +91,6 @@
         </div>
       </div>
     </div>
-    <el-dialog
-        title="其他"
-        :visible.sync="dialogVisible"
-        width="60vh">
-      <el-form ref="form" size="small" :model="form" label-width="45px">
-        <el-tabs v-model="form.type" @tab-click="handleClick">
-          <el-tab-pane label="默认" name="0"></el-tab-pane>
-          <el-tab-pane label="博客文章" name="1">
-            <el-form-item label="话题">
-              <el-select
-                  class="w-full"
-                  v-model="form.topic"
-                  filterable
-                  allow-create
-                  default-first-option
-                  placeholder="请选择">
-                <el-option
-                    v-for="(item, index) in enumTopic"
-                    :key="index"
-                    :label="item"
-                    :value="item">
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="标签">
-              <el-select
-                  class="w-full"
-                  v-model="form.tag"
-                  multiple
-                  filterable
-                  allow-create
-                  default-first-option
-                  placeholder="请选择">
-                <el-option
-                    v-for="(item, index) in enumTag"
-                    :key="index"
-                    :label="item"
-                    :value="item">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-tab-pane>
-          <el-tab-pane label="开源项目" name="2">
-            <el-form-item label="图片">
-              <el-upload
-                  class="avatar-uploader"
-                  action="/api/upload"
-                  :show-file-list="false"
-                  :on-success="handleAvatarSuccess">
-                <img v-if="form.pic" :src="form.pic" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-          </el-tab-pane>
-          <el-tab-pane label="轮播图" name="3">
-            <el-form-item label="图片">
-              <el-upload
-                  class="avatar-uploader"
-                  action="/api/upload"
-                  :show-file-list="false"
-                  :on-success="handleAvatarSuccess">
-                <img v-if="form.pic" :src="form.pic" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-          </el-tab-pane>
-        </el-tabs>
-        <el-form-item label="简介">
-          <el-input
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 5}"
-              placeholder="请输入内容"
-              v-model="form.summary">
-          </el-input>
-        </el-form-item>
-        <el-form-item label="地址">
-          <el-input
-              placeholder="请输入内容"
-              prefix-icon="el-icon-link"
-              v-model="form.url">
-          </el-input>
-        </el-form-item>
-        <div class="flex">
-          <el-form-item label="状态">
-            <el-select v-model="form.status" placeholder="请选择">
-              <el-option
-                  v-for="(item, index) in enumStatus"
-                  :key="index"
-                  :label="item.value"
-                  :value="item.key">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item class="ml-2" label="排序">
-            <el-input-number v-model="form.sort" :min="0" :max="100"></el-input-number>
-          </el-form-item>
-        </div>
-      </el-form>
-      <div slot="footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="onSubmit()">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -189,7 +98,7 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "editArticle",
+  name: "editInterview",
   data() {
     return {
       form: {
@@ -205,14 +114,10 @@ export default {
         summary: "",
         status: 1,
       },
-      enumStatus: {},
-      enumType: {},
       enumTag: [],
-      enumTopic: [],
       edIframeWin: {},
       isIframeOnload: false,
       isDetailsData: false,
-      dialogVisible: false,
       list: [],
       current_page: 0,
       per_page: 0,
@@ -224,38 +129,32 @@ export default {
     }
   },
   watch: {
-    articleGetEnumData: function (val) {
-      this.enumStatus = val.data.enumStatus
-      this.enumType = val.data.enumType
-    },
-    articleGetSelectData: function (val) {
+    interviewGetSelectData: function (val) {
       this.enumTag = val.data.tag
-      this.enumTopic = val.data.topic
     },
-    articleViewData: function (val) {
+    interviewViewData: function (val) {
       this.form = val.data
       this.isDetailsData = true;
-      this.form.type = this.form.type.toString();
       this.setContent();
       this.loading = false
     },
-    articleAddData: function (val) {
+    interviewAddData: function (val) {
       this.onSaveSuccess(val.data)
     },
-    articleEditData: function (val) {
+    interviewEditData: function (val) {
       this.onSaveSuccess(val.data)
     },
-    articleListData: function (val) {
+    interviewListData: function (val) {
       this.list = val.data.data
       this.per_page = val.data.per_page
       this.total = val.data.total
     },
-    articleDelData: function () {
+    interviewDelData: function () {
       this.$message({
         type: 'success',
         message: '删除成功!'
       });
-      this.articleList(this.params);
+      this.interviewList(this.params);
     },
     $route() {
       this.getDetails();
@@ -263,9 +162,8 @@ export default {
   },
   mounted() {
     this.edIframeWin = this.$refs.editormd.contentWindow;
-    this.articleGetEnum();
-    this.articleGetSelect();
-    this.articleList(this.params);
+    this.interviewGetSelect();
+    this.interviewList(this.params);
     this.getDetails();
     let that = this;
     window.addEventListener("message", function (event) {
@@ -283,20 +181,17 @@ export default {
   },
   methods: {
     ...mapActions([
-      'articleGetSelect', 'articleGetEnum', 'articleView', 'articleList', 'articleAdd', 'articleEdit', 'articleDel'
+      'interviewGetSelect', 'interviewView', 'interviewList', 'interviewAdd', 'interviewEdit', 'interviewDel'
     ]),
     onSearch(){
       this.params.page = 1;
       this.params.cache = false;
-      this.articleList(this.params)
+      this.interviewList(this.params)
     },
     paginationChange(page){
       this.params.page = page;
       this.params.cache = false;
-      this.articleList(this.params)
-    },
-    showDialog(){
-      this.dialogVisible = true;
+      this.interviewList(this.params)
     },
     handleClick(tab) {
       this.form.type = tab.name;
@@ -306,7 +201,7 @@ export default {
       if (this.$route.params.id) {
         this.form.id = this.$route.params.id;
         this.loading = true;
-        this.articleView({id: this.form.id});
+        this.interviewView({id: this.form.id});
       } else {
         this.form = this.$options.data().form;
         this.setContent();
@@ -314,9 +209,9 @@ export default {
     },
     onSubmit() {
       if (this.form.id) {
-        this.articleEdit(this.form);
+        this.interviewEdit(this.form);
       } else {
-        this.articleAdd(this.form);
+        this.interviewAdd(this.form);
       }
     },
     onSaveSuccess(val) {
@@ -324,10 +219,9 @@ export default {
         type: 'success',
         message: '保存成功!'
       });
-      this.dialogVisible = false;
-      this.articleList(this.params);
+      this.interviewList(this.params);
       if (val) {
-        this.$router.push('/edit/article/' + val)
+        this.$router.push('/edit/interview/' + val)
       }
     },
     setContent() {
@@ -344,9 +238,9 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.articleDel({id: item.id});
+        this.interviewDel({id: item.id});
         if (parseInt(this.$route.params.id) === item.id) {
-          this.$router.push('/edit/article');
+          this.$router.push('/edit/interview');
         }
       });
     },
@@ -357,7 +251,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'articleGetSelectData', 'articleGetEnumData', 'articleViewData', 'articleListData', 'articleAddData', 'articleEditData', 'articleDelData'
+      'interviewGetSelectData', 'interviewViewData', 'interviewListData', 'interviewAddData', 'interviewEditData', 'interviewDelData'
     ])
   }
 }
@@ -371,5 +265,8 @@ export default {
   width: 100px;
   height: 100px;
   display: block;
+}
+.w-180{
+  width: 45rem;
 }
 </style>
